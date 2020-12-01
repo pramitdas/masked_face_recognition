@@ -19,25 +19,25 @@ from sklearn.ensemble import RandomForestClassifier
 
 # load our serialized face detector from disk
 print("[INFO] loading face detector...")
-protoPath = './models_output/deploy.prototxt.txt'
-modelPath = './models_output/res10_300x300_ssd_iter_140000.caffemodel'
+protoPath = '/root/models_output/deploy.prototxt.txt'
+modelPath = '/root/models_output/res10_300x300_ssd_iter_140000.caffemodel'
 net = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 # load our serialized face embedding model from disk
 print("[INFO] loading face recognizer...")
-embedder = cv2.dnn.readNetFromTorch('./models_output/openface.nn4.small2.v1.t7')
+embedder = cv2.dnn.readNetFromTorch('/root/models_output/openface.nn4.small2.v1.t7')
 # load the actual face recognition model along with the label encoder
-recognizer = pickle.loads(open('./models_output/recognizer.pickle', "rb").read())
-le = pickle.loads(open('./models_output/le.pickle', "rb").read())
+recognizer = pickle.loads(open('/root/models_output/recognizer.pickle', "rb").read())
+le = pickle.loads(open('/root/models_output/le.pickle', "rb").read())
 # load the face mask detector model from disk
 print("[INFO] loading face mask detector model...")
-model = load_model('./models_ouput/mask_detector.model')
+model = load_model('/root/models_ouput/mask_detector.model')
 
 
 #Final Testing
 
 # load the input image from disk, clone it, and grab the image spatial
 # dimensions
-image = cv2.imread('./test/USA-ELECTIONBIDENTHNAK.jpg')
+image = cv2.imread('/root/test/USA-ELECTIONBIDENTHNAK.jpg')
 orig = image.copy()
 
 (h, w) = image.shape[:2]
