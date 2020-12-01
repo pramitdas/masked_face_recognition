@@ -9,7 +9,7 @@ import numpy as np
 import argparse
 import cv2
 import os
-from google.colab.patches import cv2_imshow
+#from google.colab.patches import cv2_imshow
 from sklearn.preprocessing import LabelEncoder
 from sklearn.svm import SVC
 import argparse
