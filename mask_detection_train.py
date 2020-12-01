@@ -30,7 +30,7 @@ BS = 32
 # grab the list of images in our dataset directory, then initialize
 # the list of data (i.e., images) and class images
 print("[INFO] loading images...")
-imagePaths = list(paths.list_images('./dataset'))
+imagePaths = list(paths.list_images('/root/dataset'))
 data = []
 labels = []
 # loop over the image paths
@@ -109,4 +109,4 @@ print(classification_report(testY.argmax(axis=1), predIdxs,
 	target_names=lb.classes_))
 # serialize the model to disk
 print("[INFO] saving mask detector model...")
-model.save('./models_output/mask_detector.model', save_format="h5")
+model.save('/root/models_output/mask_detector.model', save_format="h5")
