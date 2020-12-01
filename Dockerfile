@@ -13,5 +13,6 @@ run pip3 install scikit-learn
 run pip3 install matplotlib
 run pip3 install --upgrade tensorflow
 RUN apt install libgl1-mesa-glx -y
+copy * /root/
 cmd bash /root/run.sh
 
