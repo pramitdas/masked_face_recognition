@@ -19,20 +19,20 @@ from sklearn.ensemble import RandomForestClassifier
 
 # load our serialized face detector from disk
 print("[INFO] loading face detector...")
-protoPath = './models_ouput/deploy.prototxt.txt'
-modelPath = './models_ouput/res10_300x300_ssd_iter_140000.caffemodel'
+protoPath = '/root/models_ouput/deploy.prototxt.txt'
+modelPath = '/root/models_ouput/res10_300x300_ssd_iter_140000.caffemodel'
 detector = cv2.dnn.readNetFromCaffe(protoPath, modelPath)
 # load our serialized face embedding model from disk
 print("[INFO] loading face recognizer...")
-embedder = cv2.dnn.readNetFromTorch('./models_ouput/openface.nn4.small2.v1.t7')
+embedder = cv2.dnn.readNetFromTorch('/root/models_ouput/openface.nn4.small2.v1.t7')
 # load the face mask detector model from disk
 print("[INFO] loading face mask detector model...")
-model = load_model('./models_ouput/mask_detector.model')
+model = load_model('/root/models_ouput/mask_detector.model')
 
 
 # grab the paths to the input images in our dataset
 print("[INFO] quantifying faces...")
-imagePaths = list(paths.list_images('./faces'))
+imagePaths = list(paths.list_images('/root/faces'))
 # initialize our lists of extracted facial embeddings and
 # corresponding people names
 knownEmbeddings = []
@@ -94,14 +94,14 @@ for (i, imagePath) in enumerate(imagePaths):
 # dump the facial embeddings + names to disk
 print("[INFO] serializing {} encodings...".format(total))
 data = {"embeddings": knownEmbeddings, "names": knownNames}
-f = open('./models_output/embeddings.pickle', "wb")
+f = open('/root/models_output/embeddings.pickle', "wb")
 f.write(pickle.dumps(data))
 f.close()
 
 
 # load the face embeddings
 print("[INFO] loading face embeddings...")
-data = pickle.loads(open('./models_output/embeddings.pickle', "rb").read())
+data = pickle.loads(open('/root/models_output/embeddings.pickle', "rb").read())
 # encode the labels
 print("[INFO] encoding labels...")
 le = LabelEncoder()
@@ -114,10 +114,10 @@ recognizer = RandomForestClassifier(n_estimators = 50)
 recognizer.fit(data["embeddings"], labels)
 
 # write the actual face recognition model to disk
-f = open('./models_output/recognizer.pickle', "wb")
+f = open('/root/models_output/recognizer.pickle', "wb")
 f.write(pickle.dumps(recognizer))
 f.close()
 # write the label encoder to disk
-f = open('./models_output/le.pickle', "wb")
+f = open('/root/models_output/le.pickle', "wb")
 f.write(pickle.dumps(le))
 f.close()
